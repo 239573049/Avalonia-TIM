@@ -1,0 +1,44 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TIM.Desktop.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TIM.Desktop.Components.MessageView"
+             x:DataType="vm:MessageViewModel">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MessageViewModel />
+    </Design.DataContext>
+
+    <!-- 滚动条Item显示滚动条 -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical">
+
+            <ItemsControl ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel Margin="10,5,0,5">
+                            <Image Margin="0,-10,0,0" Height="30" Width="30"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/image.jpg">
+                            </Image>
+                            <StackPanel>
+                                <TextBlock Margin="10,5,0,5">
+                                    <Run Text="{Binding Role}"></Run>
+                                    <Run Text="{Binding Name}"></Run>
+                                </TextBlock>
+                                <Border CornerRadius="8" Margin="10,0,0,0" Background="#FFFFFF" Padding="8">
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </Border>
+                            </StackPanel>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+
+
+</UserControl>

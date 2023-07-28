@@ -1,0 +1,227 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:TIM.Desktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:components="clr-namespace:TIM.Desktop.Components"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TIM.Desktop.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        ExtendClientAreaToDecorationsHint="True"
+        Icon="/Assets/avalonia-logo.ico"
+        Width="1308"
+        Height="839"
+        Title="TIM.Desktop">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Border>
+        <Grid ColumnDefinitions="50,1,Auto,1,*">
+            <Grid RowDefinitions="*,120">
+                <StackPanel>
+                    <Border CornerRadius="8">
+                        <Image Margin="10,32,10,15" Height="32" Width="32"
+                               RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/image.jpg" />
+                    </Border>
+                    <Border CornerRadius="8">
+                        <Image Margin="10,15,10,15" Height="25" Width="25"
+                               RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/message.png" />
+                    </Border>
+                    <Border CornerRadius="8">
+                        <Image Margin="10,10,10,15" Height="25" Width="25"
+                               RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/user.png" />
+                    </Border>
+                    <Border CornerRadius="8">
+                        <Image Margin="10,10,10,15" Height="25" Width="25"
+                               RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/cloud.png" />
+                    </Border>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <Border CornerRadius="8">
+                        <Button Height="40" Width="40" Margin="5,0,5,0" Background="Transparent">
+                            <Image Margin="10,10,10,15" Height="25" Width="25"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                                   Source="../Assets/application.png" />
+                        </Button>
+                    </Border>
+                    <Border CornerRadius="8">
+                        <Button Height="40" Width="40" Margin="5,0,5,0" Background="Transparent">
+                            <Image Margin="10,15,10,15" Height="25" Width="25"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/menu.png" />
+                        </Button>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <Border Grid.Column="1" Background="#F4F4F4" />
+            <StackPanel MaxWidth="300" MinWidth="150" Grid.Column="2" Width="{Binding ListWidth}">
+                <Grid ColumnDefinitions="*,45" Margin="0,0,0,10">
+                    <Border Height="30" CornerRadius="8" Margin="15,30,0,0" BorderThickness="1" BorderBrush="#F4F4F4">
+                        <Grid ColumnDefinitions="*">
+                            <TextBox Margin="0,1,0,10"
+                                     Background="Transparent"
+                                     Height="16"
+                                     BorderBrush="Transparent"
+                                     BorderThickness="0" Foreground="#000000" FontSize="14"
+                                     FontFamily="Microsoft YaHei UI" Watermark="搜索">
+                                <TextBox.InnerLeftContent>
+                                    <Image Margin="10,7,5,7" Height="16" Width="16"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Source="../Assets/search.png" />
+                                </TextBox.InnerLeftContent>
+                            </TextBox>
+                        </Grid>
+                    </Border>
+                    <Button Background="Transparent" Margin="10,30,0,0" Grid.Column="1" Height="25" Width="25">
+                        <Image
+                            Height="15"
+                            Width="15"
+                            Margin="5"
+                            RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/add.png" />
+                    </Button>
+                </Grid>
+                <ScrollViewer>
+                    <ListBox SelectedItem="{Binding SelectedChat}" ItemsSource="{Binding Chats}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel Margin="0,10,10,10">
+                                    <Image Width="40" Height="40" Source="../Assets/.net.jpg" />
+                                    <StackPanel Margin="10,-10,0,0">
+                                        <TextBlock FontSize="16" TextWrapping="WrapWithOverflow" FontWeight="Bold"
+                                                   Text="{Binding Name}" />
+                                        <TextBlock Margin="0,5,0,0" FontSize="12" Text="{Binding Description}" />
+                                    </StackPanel>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.Styles>
+                            <Styles>
+                                <Style Selector="ListBoxItem">
+                                    <Setter Property="Height" Value="65" />
+                                </Style>
+                            </Styles>
+                        </ListBox.Styles>
+                    </ListBox>
+                </ScrollViewer>
+            </StackPanel>
+
+            <Border Cursor="SizeWestEast" PointerMoved="List_OnPointerMoved"
+                    PointerPressed="List_OnPointerPressed"
+                    PointerReleased="List_OnPointerReleased"
+                    Grid.Column="3" Background="#F4F4F4" />
+
+            <Grid RowDefinitions="65,1,*" Grid.Column="4">
+                <!-- 聊天框的头部 -->
+                <Border Padding="20,35,20,10">
+                    <Grid Height="20">
+                        <TextBlock HorizontalAlignment="Left" FontWeight="Bold" FontSize="20"
+                                   Text="{Binding SelectedChat.Name}" />
+                        <WrapPanel HorizontalAlignment="Right">
+                            <Image Height="20" Width="20" Margin="10,0,10,0"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/folder.png" />
+                            <Image Height="20" Width="20" Margin="10,0,10,0"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/book.png" />
+                            <Image Height="20" Width="20" Margin="10,0,10,0"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/image.png" />
+                            <Image Height="20" Width="20" Margin="10,0,10,0"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/function.png" />
+                            <Image Height="20" Width="20" Margin="10,0,10,0"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/user-add.png" />
+                            <Image Height="20" Width="20" Margin="10,0,0,0"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality" Source="../Assets/setting.png" />
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Height="1" Background="#F4F4F4" />
+                <Grid Grid.Row="2" ColumnDefinitions="*,1,208">
+                    <Grid RowDefinitions="*,1,Auto" Name="ChatPanelGrid">
+                        <StackPanel Background="#F5F6F7">
+                            <components:MessageView DataContext="{Binding MessageViewModel}"/>
+                        </StackPanel>
+                        <Border Grid.Row="1" Height="1" Background="#E0E0E0"
+                                PointerReleased="Chat_OnPointerReleased"
+                                PointerPressed="Chat_OnPointerPressed"
+                                PointerMoved="Chat_OnPointerMoved"
+                                Cursor="SizeNorthSouth" />
+                        <!-- 聊天功能块 -->
+                        <Grid Background="#F5F6F7" MaxHeight="330" RowDefinitions="45,*" MinHeight="115" Grid.Row="2"
+                              Height="{Binding ChatPanelHeight}">
+                            <Grid Margin="15,10,15,0" ColumnDefinitions="*">
+                                <WrapPanel>
+                                    <Button HorizontalAlignment="Left" Height="30" Width="30" Background="Transparent">
+                                        <Image RenderOptions.BitmapInterpolationMode="HighQuality" Height="25"
+                                               Width="25" Source="../Assets/face.png" />
+                                    </Button>
+                                    <Button HorizontalAlignment="Left" Height="30" Width="45" Background="Transparent">
+                                        <Grid ColumnDefinitions="*">
+                                            <Image Margin="-5" HorizontalAlignment="Left" Height="25" Width="25"
+                                                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                   Source="../Assets/shear.png" />
+                                            <Image Height="10" Width="10" HorizontalAlignment="Right"
+                                                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                   Source="../Assets/pulldown.png" />
+                                        </Grid>
+                                    </Button>
+                                    <Button HorizontalAlignment="Left" Height="30" Width="30" Background="Transparent">
+                                        <Image RenderOptions.BitmapInterpolationMode="HighQuality" Height="25"
+                                               Width="25" Source="../Assets/image.png" />
+                                    </Button>
+                                    <Button HorizontalAlignment="Left" Height="30" Width="30" Background="Transparent">
+                                        <Image RenderOptions.BitmapInterpolationMode="HighQuality" Height="25"
+                                               Width="25" Source="../Assets/folder.png" />
+                                    </Button>
+                                </WrapPanel>
+                            </Grid>
+
+                            <Grid Grid.Row="1" RowDefinitions="*,60">
+                                <!-- 输入框 -->
+                                <TextBox BorderBrush="Transparent" />
+                                <!-- 发送按钮 -->
+                                <StackPanel Grid.Row="1">
+                                    <Button HorizontalAlignment="Right" Margin="15" Background="#1E6FFF">
+                                        <WrapPanel>
+                                            <TextBlock Foreground="#FFFFFF" FontSize="14" FontWeight="Bold"
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                       Text="发送" />
+                                            <Image Height="15" RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                   Source="../Assets/main-string.png" />
+                                            <Image Height="15" Width="15"
+                                                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                   Source="../Assets/pull-down.png" />
+                                        </WrapPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Border Grid.Column="1" Background="#F4F4F4" />
+                    <StackPanel Background="#F5F6F7" Grid.Column="2">
+                        <Grid RowDefinitions="120,1,*">
+                            <StackPanel Height="120">
+                                <Grid Cursor="Hand" VerticalAlignment="Top" Height="35" ColumnDefinitions="*">
+                                    <TextBlock Cursor="Hand" HorizontalAlignment="Left" FontWeight="Bold"
+                                               Margin="15,10,0,0" Text="群公告" />
+                                    <Image Cursor="Hand" Height="15" Width="15" HorizontalAlignment="Right"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Source="../Assets/RightArrow.png" />
+                                </Grid>
+                                <TextBlock FontSize="12" Foreground="#919293" Margin="15,0,20,20" TextWrapping="Wrap">
+                                    来一来看一看，群里唯一的一篇小文章，看不了吃亏，看不了上当
+                                </TextBlock>
+                            </StackPanel>
+                            <Border Grid.Row="1" Background="#E0E0E0" />
+                            <Border Grid.Row="2">
+                                
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

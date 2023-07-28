@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3CABA766-0771-4A24-9C24-717B4D2EBEDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TIM.Desktop", "src\TIM.Desktop\TIM.Desktop.csproj", "{65E91061-4E0A-4745-995F-9D933ADDA44D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65E91061-4E0A-4745-995F-9D933ADDA44D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E91061-4E0A-4745-995F-9D933ADDA44D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E91061-4E0A-4745-995F-9D933ADDA44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E91061-4E0A-4745-995F-9D933ADDA44D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65E91061-4E0A-4745-995F-9D933ADDA44D} = {3CABA766-0771-4A24-9C24-717B4D2EBEDF}
+	EndGlobalSection
+EndGlobal
