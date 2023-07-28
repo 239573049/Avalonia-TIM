@@ -5,7 +5,7 @@
     <a href="#公众号"><img src="https://img.shields.io/badge/公众号-Token的技术分享-blue.svg?style=plasticr"></a>
     <a href="#公众号"><img src="https://img.shields.io/badge/交流群-加入开发-green.svg?style=plasticr"></a>
     <a href="https://github.com/239573049/Avalonia-TIM"><img src="https://img.shields.io/badge/github-项目地址-yellow.svg?style=plasticr"></a>
-    <a href="https://gitee.com/239573049/Avalonia-TIM"><img src="https://img.shields.io/badge/码云-项目地址-orange.svg?style=plasticr"></a>
+    <a href="https://gitee.com/hejiale010426/avalonia-tim"><img src="https://img.shields.io/badge/码云-项目地址-orange.svg?style=plasticr"></a>
     <a href="https://github.com/239573049/Avalonia-TIM/blob/master/LICENSE" target="_blank">
         <img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-blue.svg">
     </a> 
